@@ -91,13 +91,31 @@ namespace Biblioteca_Gruppo4
                             if (Titoli[i] == titolo)
                             {
                                 copie[i]++;
+                                Console.WriteLine("Il libro é gia presente nei nostri archivi, non servono le altre informazioni");
+                                Console.ReadKey();
+                                break;
                             }
                         }
 
-                        //Aumenta il contatore dei libri
+                        Titoli[libri_unici] = titolo;
+
+                        Console.WriteLine("Inserisci l'autore del libro");
+                        Autori[libri_unici] = Console.ReadLine();
+
+                        Console.WriteLine("Inserisci il prezzo");
+                        prezzo[libri_unici] = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Inserisci la categoria");
+                        categoria[libri_unici] = Console.ReadLine();
+
+                        Console.WriteLine("Inserisci la casa editrice");
+                        casa_editrice[libri_unici] = Console.ReadLine();
+
+                        //Aumento libri unici
                         libri_unici++;
 
-
+                        Console.WriteLine("Libro aggiunto con successo");
+                        Console.ReadKey();
 
                         break;
 
