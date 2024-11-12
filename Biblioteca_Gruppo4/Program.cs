@@ -86,15 +86,24 @@ namespace Biblioteca_Gruppo4
                         Console.WriteLine("Inserisci il titolo del libro");
                         string titolo = Console.ReadLine();
 
+                        //Bool per vedere se il libro é presente o meno
+                        bool pres = false;
+
                         for(int i =0; i < Titoli.Length; i++)
                         {
                             if (Titoli[i] == titolo)
                             {
                                 copie[i]++;
                                 Console.WriteLine("Il libro é gia presente nei nostri archivi, non servono le altre informazioni");
+                                pres = true;
                                 Console.ReadKey();
                                 break;
                             }
+                        }
+                        
+                        if(pres)
+                        {
+                            break;
                         }
 
                         Titoli[libri_unici] = titolo;
