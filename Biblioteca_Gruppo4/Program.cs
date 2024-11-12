@@ -30,10 +30,11 @@ namespace Biblioteca_Gruppo4
             double[] prezzo = new double[2];
             string[] categoria = new string[2];
             string[] casa_editrice = new string[2];
+            int[] copie = new int[2];
 
 
             //Quanti libri abbiamo nella biblioteca
-            int libri = 0;
+            int libri_unici = 0;
 
 
             //Menu
@@ -49,7 +50,7 @@ namespace Biblioteca_Gruppo4
                 {
                     case 1:
                         //Se abbiamo raggiunto il massimo
-                        if (libri == Titoli.Length)
+                        if (libri_unici == Titoli.Length)
                         {
                             //Crea 5 array temporanei lunghi +1 rispetto a quelli originali
                             string[] TitoliTemp = new string[Titoli.Length + 1];
@@ -57,6 +58,7 @@ namespace Biblioteca_Gruppo4
                             double[] prezzoTemp = new double[prezzo.Length + 1];
                             string[] categoriaTemp = new string[categoria.Length + 1];
                             string[] casa_editriceTemp = new string[casa_editrice.Length + 1];
+                            int[] copie_temp = new int[copie.Length + 1];
 
                             for (int i = 0; i < Titoli.Length; i++)
                             {
@@ -66,6 +68,7 @@ namespace Biblioteca_Gruppo4
                                 prezzoTemp[i] = prezzo[i];
                                 categoriaTemp[i] = categoria[i];
                                 casa_editriceTemp[i] = casa_editrice[i];
+                                copie_temp[i] = copie[i];
 
                             }
                             //Aggiungi i nuovi valori, cosi da avere una casella in piu
@@ -74,26 +77,25 @@ namespace Biblioteca_Gruppo4
                             prezzo = prezzoTemp;
                             categoria = categoriaTemp;
                             casa_editrice = casa_editriceTemp;
+                            copie = copie_temp;
 
-                            //Aumenta il contatore dei libri
-                            libri++;
+
                         }
 
 
                         Console.WriteLine("Inserisci il titolo del libro");
-                        Titoli[libri] = Console.ReadLine();
+                        string titolo = Console.ReadLine();
 
-                        Console.WriteLine("Inserisci l'autore del libro");
-                        Autori[libri] = Console.ReadLine();
+                        for(int i =0; i < Titoli.Length; i++)
+                        {
+                            if (Titoli[i] == titolo)
+                            {
+                                copie[i]++;
+                            }
+                        }
 
-                        Console.WriteLine("Inserisci il prezzo del libro");
-                        prezzo[libri] = double.Parse(Console.ReadLine());
-
-                        Console.WriteLine("Inserisci la categoria del libro");
-                        categoria[libri] = Console.ReadLine();
-
-                        Console.WriteLine("Inserisci la casa editrice del libro");
-                        casa_editrice[libri] = Console.ReadLine();
+                        //Aumenta il contatore dei libri
+                        libri_unici++;
 
 
 
