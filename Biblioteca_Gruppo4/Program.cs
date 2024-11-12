@@ -48,6 +48,54 @@ namespace Biblioteca_Gruppo4
                 switch(scelta)
                 {
                     case 1:
+                        //Se abbiamo raggiunto il massimo
+                        if (libri == Titoli.Length)
+                        {
+                            //Crea 5 array temporanei lunghi +1 rispetto a quelli originali
+                            string[] TitoliTemp = new string[Titoli.Length + 1];
+                            string[] AutoriTemp = new string[Autori.Length + 1];
+                            double[] prezzoTemp = new double[prezzo.Length + 1];
+                            string[] categoriaTemp = new string[categoria.Length + 1];
+                            string[] casa_editriceTemp = new string[casa_editrice.Length + 1];
+
+                            for (int i = 0; i < Titoli.Length; i++)
+                            {
+                                //Copia i valori degli array originali in quelli temporanei
+                                TitoliTemp[i] = Titoli[i];
+                                AutoriTemp[i] = Autori[i];
+                                prezzoTemp[i] = prezzo[i];
+                                categoriaTemp[i] = categoria[i];
+                                casa_editriceTemp[i] = casa_editrice[i];
+
+                            }
+                            //Aggiungi i nuovi valori, cosi da avere una casella in piu
+                            Titoli = TitoliTemp;
+                            Autori = AutoriTemp;
+                            prezzo = prezzoTemp;
+                            categoria = categoriaTemp;
+                            casa_editrice = casa_editriceTemp;
+
+                            //Aumenta il contatore dei libri
+                            libri++;
+                        }
+
+
+                        Console.WriteLine("Inserisci il titolo del libro");
+                        Titoli[libri] = Console.ReadLine();
+
+                        Console.WriteLine("Inserisci l'autore del libro");
+                        Autori[libri] = Console.ReadLine();
+
+                        Console.WriteLine("Inserisci il prezzo del libro");
+                        prezzo[libri] = double.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Inserisci la categoria del libro");
+                        categoria[libri] = Console.ReadLine();
+
+                        Console.WriteLine("Inserisci la casa editrice del libro");
+                        casa_editrice[libri] = Console.ReadLine();
+
+
                         break;
 
                     case 2:
