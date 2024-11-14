@@ -94,6 +94,10 @@ namespace Biblioteca_Gruppo4
 
                         for(int i =0; i < Titoli.Length; i++)
                         {
+                            if (Titoli[i] == null)
+                            {
+                                continue;
+                            }
                             if (Titoli[i].ToLower() == titolo.ToLower())
                             {
                                 copie[i]++;
@@ -138,6 +142,54 @@ namespace Biblioteca_Gruppo4
                         break;
 
                     case 4:
+                        Console.Clear();
+                        Console.WriteLine("Autori Presenti");
+
+                        string[] autori_unici = new string[1];
+
+                        //Metto dentro l`array tutti i autori 
+                        for (int i = 0; i < Autori.Length; i++)
+                        {
+                            //Controllo che non ci siano doppioni
+                            bool flag = false;
+                            for (int j = 0; j < autori_unici.Length; j++)
+                            {
+                                if (Autori[i].ToLower() == autori_unici[j].ToLower())
+                                {
+                                    flag = true;
+                                    break;
+                                }
+                            }
+
+                            //Se non sono doppioni li aggiungo
+                            if (!flag)
+                            {
+                                autori_unici[autori_unici.Length - 1] = Autori[i];
+                                string[] temp = new string[autori_unici.Length + 1];
+                                for (int j = 0; j < autori_unici.Length; j++)
+                                {
+                                    temp[j] = autori_unici[j];
+                                }
+                                autori_unici = temp;
+                            }
+                        }
+
+                        //Stampo
+
+                        for (int i = 0; i < autori_unici.Length; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                Console.WriteLine(autori_unici[i]);
+                            }
+                            else
+                            {
+                                Console.Write("\t" + autori_unici[i]);
+                            }
+
+                        }
+
+                        Console.ReadKey();
 
                         break;
                     case 5:
