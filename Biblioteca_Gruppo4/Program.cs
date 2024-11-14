@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,8 @@ namespace Biblioteca_Gruppo4
 
         static void Main(string[] args)
         {
+
+            
 
             string[] Titoli = new string[2];
             string[] Autori = new string[2];
@@ -91,7 +94,7 @@ namespace Biblioteca_Gruppo4
 
                         for(int i =0; i < Titoli.Length; i++)
                         {
-                            if (Titoli[i] == titolo)
+                            if (Titoli[i].ToLower() == titolo.ToLower())
                             {
                                 copie[i]++;
                                 Console.WriteLine("Il libro é gia presente nei nostri archivi, non servono le altre informazioni");
@@ -112,7 +115,7 @@ namespace Biblioteca_Gruppo4
                         Autori[libri_unici] = Console.ReadLine();
 
                         Console.WriteLine("Inserisci il prezzo");
-                        prezzo[libri_unici] = int.Parse(Console.ReadLine());
+                        prezzo[libri_unici] = double.Parse(Console.ReadLine());
 
                         Console.WriteLine("Inserisci la categoria");
                         categoria[libri_unici] = Console.ReadLine();
@@ -135,8 +138,8 @@ namespace Biblioteca_Gruppo4
                         break;
 
                     case 4:
-                        break;
 
+                        break;
                     case 5:
                         break;
 
