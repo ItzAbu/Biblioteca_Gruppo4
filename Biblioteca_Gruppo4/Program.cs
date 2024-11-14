@@ -120,6 +120,15 @@ namespace Biblioteca_Gruppo4
                         break;
 
                     case 2:
+                        Console.WriteLine("i libri presenti nella biblioteca sono");
+                        for (int i = 0;i < Titoli.Length;i++)
+                        {
+                            Console.WriteLine($"il titolo del libro è:{Titoli[i] + "\t" + copie[i]}");
+                            Console.WriteLine($"L'autore/i del libro sono/è:{Autori[i]}");
+                            Console.WriteLine($"il prezzo del libro è:{prezzo[i]}");
+                            Console.WriteLine($"la categoria del libro è:{categoria[i]}");
+                            Console.WriteLine($"la casa editrice del libro è:{casa_editrice[i]}");                        }
+                        Console.ReadKey();
                         break;
 
                     case 3:
