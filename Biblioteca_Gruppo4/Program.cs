@@ -127,6 +127,9 @@ namespace Biblioteca_Gruppo4
                         Console.WriteLine("Inserisci la casa editrice");
                         casa_editrice[libri_unici] = Console.ReadLine();
 
+                        copie[libri_unici] = 1;
+
+
                         //Aumento libri unici
                         libri_unici++;
 
@@ -136,18 +139,106 @@ namespace Biblioteca_Gruppo4
                         break;
 
                     case 2:
-                        Console.WriteLine("i libri presenti nella biblioteca sono");
+                        Console.WriteLine("I libri presenti nella biblioteca sono");
                         for (int i = 0;i < Titoli.Length;i++)
                         {
                             Console.WriteLine($"il titolo del libro è:{Titoli[i] + "\t" + copie[i]}");
-                            Console.WriteLine($"L'autore/i del libro sono/è:{Autori[i]}");
-                            Console.WriteLine($"il prezzo del libro è:{prezzo[i]}");
-                            Console.WriteLine($"la categoria del libro è:{categoria[i]}");
-                            Console.WriteLine($"la casa editrice del libro è:{casa_editrice[i]}");                        }
+                        }
                         Console.ReadKey();
                         break;
 
                     case 3:
+                        Console.Clear();
+                        Console.WriteLine("Elenco dei libri, decidi quale libro vuoi eliminare in base al numero");
+                        for(int i = 0; i < Titoli.Length; i++)
+                        {
+                            Console.WriteLine($"[{i+1}] {Titoli[i]} x{copie[i]}");
+                        }
+
+                        Console.WriteLine("Seleziona il libro da eliminare, scegli il numero");
+                        int lettura;
+                        try
+                        {
+                            lettura = int.Parse(Console.ReadLine());
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Scelta errata");
+                            Console.ReadKey();
+                            break;
+                        }
+
+
+                        if (copie[lettura -1] > 1)
+                        {
+                            copie[lettura -1]--;
+
+                            Console.WriteLine("Copia eliminata con successo");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+
+                        }
+                        Titoli[lettura-1] = "";
+                        Autori[lettura - 1] = "";
+                        prezzo[lettura - 1] = 0;
+                        categoria[lettura - 1] = "";
+                        casa_editrice[lettura - 1] = "";
+                        copie[lettura - 1] = 0;
+
+                        for (int i = lettura - 1; i < Titoli.Length-1; i++)
+                        {
+                            string temp;
+                            int tempint;
+                            double tempdouble;
+
+                            temp = Titoli[i + 1];
+                            Titoli[i] = temp;
+
+                            temp = Autori[i + 1];
+                            Autori[i] = temp;
+
+                            tempdouble = prezzo[i + 1];
+                            prezzo[i] = tempdouble;
+
+                            temp = categoria[i + 1];
+                            categoria[i] = temp;
+
+                            temp = casa_editrice[i + 1];
+                            casa_editrice[i] = temp;
+
+                            tempint = copie[i + 1];
+                            copie[i] = tempint;
+                        }
+                        string[] titolitemp = new string[Titoli.Length-1];
+                        string[] autoritemp = new string[Autori.Length - 1];
+                        double[] Prezzotemp = new double[prezzo.Length - 1];
+                        string[] categoriatemp = new string[categoria.Length - 1];
+                        string[] casa_editricetemp = new string[casa_editrice.Length - 1];
+                        int[] copietemp = new int[copie.Length - 1];
+
+
+                        for (int i = 0; i < Titoli.Length -1; i++)
+                        {
+                            titolitemp[i] = Titoli[i];
+                            autoritemp[i] = Autori[i];
+                            Prezzotemp[i] = prezzo[i];
+                            categoriatemp[i] = categoria[i];
+                            casa_editricetemp[i] = casa_editrice[i];
+                            copietemp[i] = copie[i];
+                        }
+
+                        Titoli = titolitemp;
+                        Autori = autoritemp;
+                        prezzo = Prezzotemp;
+                        categoria = categoriatemp;
+                        casa_editrice = casa_editricetemp;
+                        copie = copietemp;  
+
+                        Console.Clear();
+                        Console.WriteLine("Il libro e stato eliminato");
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
 
                     case 4:
@@ -202,12 +293,28 @@ namespace Biblioteca_Gruppo4
 
                         break;
                     case 5:
+                        Console.Clear();
+                        double max = -1;
+                        int pos = 0;
+
+                        for(int i = 0; i < prezzo.Length; i++)
+                        {
+                            if (prezzo[i] > max)
+                            {
+                                max = prezzo[i];
+                                pos = i; 
+                            }
+                        }
+
+                        Console.WriteLine($"Il libro piu costoso:{Titoli[pos]} \t il prezzo : {prezzo[pos]}");
+                        Console.ReadKey();
                         break;
 
                     case 6:
                         break;
 
                     case 7:
+
                         break;
 
                     case 8:
