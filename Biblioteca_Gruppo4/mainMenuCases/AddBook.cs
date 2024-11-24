@@ -35,9 +35,7 @@ namespace Biblioteca_Gruppo4.Cases
             for (int i = 0; i < Titoli.Length; i++)
             {
                 if (Titoli[i] == null)
-                {
                     continue;
-                }
                 if (ToLower.ToLowerString(Titoli[i]) == ToLower.ToLowerString(titolo))
                 {
                     copie[i]++;
@@ -48,7 +46,6 @@ namespace Biblioteca_Gruppo4.Cases
             }
 
             Titoli[libri_unici] = titolo;
-           
             Console.WriteLine("Inserisci l'autore del libro");
             Autori[libri_unici] = Console.ReadLine();
 
