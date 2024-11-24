@@ -53,8 +53,7 @@ namespace Biblioteca_Gruppo4.Cases
             Autori[libri_unici] = Console.ReadLine();
 
             try{Console.WriteLine("Inserisci il prezzo");
-                prezzo[libri_unici] = double.Parse(Console.ReadLine());
-            }catch (Exception e)
+                prezzo[libri_unici] = double.Parse(Console.ReadLine()); }catch (Exception e)
             {
                 Console.WriteLine("Errore, prezzo non valido");
                 Console.ReadKey();
@@ -74,7 +73,6 @@ namespace Biblioteca_Gruppo4.Cases
             casa_editrice[libri_unici] = Console.ReadLine();
 
             copie[libri_unici] = 1;
-
 
             //Aumento libri unici
             libri_unici++;
