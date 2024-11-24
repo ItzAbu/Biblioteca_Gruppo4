@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +32,6 @@ namespace Biblioteca_Gruppo4.Cases
             string titolo = Console.ReadLine();
 
             //Libro gia presente o meno
-
             for (int i = 0; i < Titoli.Length; i++)
             {
                 if (Titoli[i] == null)
@@ -49,8 +48,6 @@ namespace Biblioteca_Gruppo4.Cases
             }
 
             Titoli[libri_unici] = titolo;
-
-
            
             Console.WriteLine("Inserisci l'autore del libro");
             Autori[libri_unici] = Console.ReadLine();
