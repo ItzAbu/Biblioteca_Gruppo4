@@ -34,12 +34,14 @@ namespace Biblioteca_Gruppo4
             string[] giorno_preso = new string[2];
             string[] tempo_trattenuto = new string[2];
             int[] codice_prestito = new int[2];
-            
+            int retuns = 0;
+
 
 
             //Quanti libri abbiamo nella biblioteca
             int libri_unici = 0;
             int libri_unici_copia = 0;
+            
 
 
             //Menu
@@ -96,7 +98,7 @@ namespace Biblioteca_Gruppo4
                     case 8:
                         
                         MenuPrestiti.menuPrestiti(Titoli, Autori, prezzo, categoria, casa_editrice, copie, ref libri_unici_copia , ref prestiti, ref libri_prestito, 
-                            ref utenti_prestito_nome, ref utenti_prestito_cognome, ref giorno_preso, ref tempo_trattenuto, ref codice_prestito);
+                            ref utenti_prestito_nome, ref utenti_prestito_cognome, ref giorno_preso, ref tempo_trattenuto, ref codice_prestito, ref retuns);
 
                         break;
 

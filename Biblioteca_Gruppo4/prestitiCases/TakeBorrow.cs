@@ -58,33 +58,21 @@ namespace Biblioteca_Gruppo4.prestitiCases
 
         static public void takeBorrow(string[] Titoli,int[] copie, ref string[] libri_prestito, ref int prestiti, 
             ref string[] utenti_prestito_nome, ref string[] utenti_prestito_cognome , ref string[] giorni_preso, 
-            ref string[] tempo_trattenuto, ref int[] codice_prestito)
+            ref string[] tempo_trattenuto, ref int[] codice_prestito , ref int returns)
         {
             Console.Clear();
             string[] strings = Titoli;
             int[] ints = copie;
-            //Controllo quali libro sono disponibili
-            int count = 0;
-            for(int i = 0; i < strings.Length; i++)
-            {
-                if (strings[i] == null)
-                {
-                    count++;
-                    continue;
-                }
-                
-            }
-            if (count == strings.Length)
-            {
-                Console.WriteLine("Non ci sono libri disponibili");
-                Console.ReadKey();
-                return;
-            }
+            
 
             for (int i=0; i < libri_prestito.Length; i++)
             {
                 for(int j = 0; j < strings.Length; j++)
                 {
+                    if (libri_prestito[i] == null)
+                    {
+                        continue;
+                    }
                     if (libri_prestito[i] == strings[j])
                     {
                         if (ints[j] > 1)
@@ -99,28 +87,29 @@ namespace Biblioteca_Gruppo4.prestitiCases
                 }
             }
 
+            //controllo se ci sono libri disponibili
+            bool flag = false;
+            for (int i = 0; i < strings.Length; i++)
+            {
+                if (strings[i] != null)
+                {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag)
+            {
+                Console.WriteLine("Non ci sono libri disponibili");
+                Console.ReadKey();
+                return;
+            }
+
             //Stampo i libri disponibili e faccio il menu per il prestito
             ConsoleKeyInfo key;
             int pos = 0;
             do
             {
-                //Controllo che ci siano libri disponibili
-                int count2 = 0;
-                for (int i = 0; i < strings.Length; i++)
-                {
-                    if (strings[i] == null)
-                    {
-                        count2++;
-                        continue;
-                    }
-
-                }
-                if (count2 == strings.Length)
-                {
-                    Console.WriteLine("Non ci sono libri disponibili");
-                    Console.ReadKey();
-                    return;
-                }
+                
 
                 Menu(strings, pos);
                 key = Console.ReadKey();
@@ -188,21 +177,21 @@ namespace Biblioteca_Gruppo4.prestitiCases
 
 
             }
-            libri_prestito[prestiti] = strings[pos ];
-            utenti_prestito_nome[prestiti] = nome;
-            utenti_prestito_cognome[prestiti] = cognome;
-            giorni_preso[prestiti] = DateTime.Now.ToString("dd/MM/yyyy");
-            tempo_trattenuto[prestiti] = giorno_restituisci;
-            codice_prestito[prestiti] = prestiti;
+            libri_prestito[prestiti - returns] = strings[pos ];
+            utenti_prestito_nome[prestiti - returns] = nome;
+            utenti_prestito_cognome[prestiti - returns] = cognome;
+            giorni_preso[prestiti - returns] = DateTime.Now.ToString("dd/MM/yyyy");
+            tempo_trattenuto[prestiti - returns] = giorno_restituisci;
+            codice_prestito[prestiti - returns] = prestiti;
             prestiti++;
 
             Console.WriteLine("Libro preso in prestito con successo");
 
-            Console.WriteLine("Libro : " + libri_prestito[prestiti - 1]);
-            Console.WriteLine("Utente : " + utenti_prestito_nome[prestiti - 1] + " " + utenti_prestito_cognome[prestiti - 1]);
-            Console.WriteLine("Giorno preso : " + giorni_preso[prestiti - 1]);
-            Console.WriteLine("Giorno da restituire : " + tempo_trattenuto[prestiti - 1]);
-            Console.WriteLine("Codice prestito : " + codice_prestito[prestiti - 1]);
+            Console.WriteLine("Libro : " + libri_prestito[prestiti - 1 - returns]);
+            Console.WriteLine("Utente : " + utenti_prestito_nome[prestiti - 1 - returns] + " " + utenti_prestito_cognome[prestiti - 1 - returns]);
+            Console.WriteLine("Giorno preso : " + giorni_preso[prestiti - 1 - returns]);
+            Console.WriteLine("Giorno da restituire : " + tempo_trattenuto[prestiti - 1 - returns]);
+            Console.WriteLine("Codice prestito : " + codice_prestito[prestiti - 1 - returns]);
 
             Console.ReadKey();
 

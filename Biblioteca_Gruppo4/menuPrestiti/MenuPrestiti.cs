@@ -9,7 +9,6 @@ namespace Biblioteca_Gruppo4.menuPrestiti
         {
             string[] strings = {
                 "Prendi in prestito un libro",
-                "Cerca libro disponibile",
                 "Riconsegna libro",
                 "Stampa tutti i libri in prestito"
             };
@@ -51,7 +50,7 @@ namespace Biblioteca_Gruppo4.menuPrestiti
 
         static public void menuPrestiti(string[] Titoli, string[] Autori, double[] prezzo, string[] categoria, string[] casa_editrice, int[] copie,ref int libri_unici,
                                         ref int prestiti, ref string[] libri_prestito, ref string[] utenti_prestito_nome, ref string[] utenti_prestito_cognome,
-                                        ref string[] giorno_preso, ref string[] tempo_trattenuto, ref int[] codice_prestito)
+                                        ref string[] giorno_preso, ref string[] tempo_trattenuto, ref int[] codice_prestito, ref int returns)
         {
             ConsoleKeyInfo key;
             int pos = 1;
@@ -64,9 +63,13 @@ namespace Biblioteca_Gruppo4.menuPrestiti
                 //Se premo freccia giú incremento la posizione quindi va all`opzione dopo
                 if (key.Key == ConsoleKey.DownArrow)
                 {
-                    if (pos < 4)
+                    if (pos < 3)
                     {
                         pos++;
+                    }
+                    if(pos == 4)
+                    {
+                        pos = 1;
                     }
                 }
                 //Se premo freccia su decremento la posizione quindi va all`opzione prima
@@ -76,6 +79,10 @@ namespace Biblioteca_Gruppo4.menuPrestiti
                     {
                         pos--;
                     }
+                    if (pos == 0)
+                    {
+                        pos = 4;
+                    }
                 }
             } while (key.Key != ConsoleKey.Enter);
 
@@ -83,18 +90,22 @@ namespace Biblioteca_Gruppo4.menuPrestiti
             {
                 case 1:
 
-                    TakeBorrow.takeBorrow(Titoli,copie, ref libri_prestito, ref prestiti, ref utenti_prestito_nome, ref utenti_prestito_cognome, ref giorno_preso, ref tempo_trattenuto, ref codice_prestito);
+                    TakeBorrow.takeBorrow(Titoli,copie, ref libri_prestito, ref prestiti, ref utenti_prestito_nome, ref utenti_prestito_cognome, ref giorno_preso, ref tempo_trattenuto, ref codice_prestito, ref returns);
 
                     break;
 
                 case 2:
+
+                    ReturnBook.returnBook(ref libri_prestito,ref utenti_prestito_nome, ref utenti_prestito_cognome, ref giorno_preso, ref tempo_trattenuto, ref codice_prestito, ref returns);
+
                     break;
 
                 case 3:
+
+                    ShowBorrowesBooks.showBorrowedBooks(libri_prestito, utenti_prestito_nome, utenti_prestito_cognome, giorno_preso, tempo_trattenuto, codice_prestito, prestiti);
+
                     break;
 
-                case 4:
-                    break;
             }
         }
     }
