@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -33,7 +33,8 @@ namespace Biblioteca_Gruppo4.Cases
                         break;
                     }
 
-                    if (ToLower.ToLowerString(Autori[i]) == ToLower.ToLowerString(autori_unici[j]))
+                    if (ToLower.ToLowerString(Autori[i]) 
+						== ToLower.ToLowerString(autori_unici[j]))
                     {
                         flag = true;
                         break;
