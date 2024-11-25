@@ -1,0 +1,89 @@
+\documentclass[a4paper,12pt]{article}
+
+% Pacchetti utili
+\usepackage[utf8]{inputenc}  % Codifica UTF-8
+\usepackage[italian]{babel} % Lingua italiana
+\usepackage{amsmath, amssymb} % Simboli matematici
+\usepackage{graphicx} % Per inserire immagini
+\usepackage{hyperref} % Link cliccabili
+\usepackage{listings} % Codice sorgente
+\usepackage{xcolor} % Colori personalizzati
+
+% Configurazione per il codice
+\lstset{
+  language=C#, % Cambia con il linguaggio che hai usato
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  frame=single,
+  breaklines=true,
+  captionpos=b,
+  showspaces=false,
+  showstringspaces=false
+}
+
+\title{Relazione del Progetto di Informatica}
+\author{Il tuo nome}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents % Genera un indice dei contenuti
+
+\newpage
+
+\section{Introduzione}
+In questa relazione verrà descritto il progetto di informatica svolto, specificando gli obiettivi, le tecnologie utilizzate e i risultati ottenuti.
+
+\section{Obiettivi del Progetto}
+Descrivi qui gli obiettivi principali del progetto. Per esempio:
+\begin{itemize}
+    \item Sviluppare un'applicazione/software per \textit{[specifica scopo]}.
+    \item Implementare algoritmi di \textit{[specifica algoritmi]}.
+    \item Testare e ottimizzare il sistema per \textit{[specifica uso]}.
+\end{itemize}
+
+\section{Strumenti e Tecnologie}
+Elenca gli strumenti utilizzati, ad esempio:
+\begin{itemize}
+    \item Linguaggi di programmazione: Python, Java, ecc.
+    \item Librerie o framework: NumPy, Flask, ecc.
+    \item Ambiente di sviluppo: Visual Studio Code, PyCharm, ecc.
+\end{itemize}
+
+\section{Descrizione del Progetto}
+Descrivi il progetto in dettaglio, ad esempio:
+\begin{itemize}
+    \item Architettura del sistema.
+    \item Funzionamento del codice.
+    \item Problemi riscontrati e soluzioni adottate.
+\end{itemize}
+
+\subsection{Struttura del Codice}
+Inserisci una breve spiegazione del codice e qualche esempio:
+
+\begin{lstlisting}[caption=Esempio di codice]
+def esempio_funzione():
+    print("Ciao, mondo!")
+\end{lstlisting}
+
+\section{Risultati}
+Descrivi i risultati ottenuti:
+\begin{itemize}
+    \item Prestazioni del sistema.
+    \item Test effettuati.
+    \item Confronto con gli obiettivi iniziali.
+\end{itemize}
+
+\section{Conclusioni}
+Riassumi brevemente l'esperienza, i punti di forza e le possibili migliorie future.
+
+\section*{Riferimenti}
+Inserisci eventuali fonti o riferimenti bibliografici.
+
+\end{document}

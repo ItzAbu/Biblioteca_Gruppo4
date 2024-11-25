@@ -16,7 +16,7 @@
 
             int consoleWidth = Console.WindowWidth;
 
-            int padding = (consoleWidth - (str[0].Length + str[1].Length)) / 2;
+            int padding = (consoleWidth - (str[0].Length + str[1].Length + "\t".Length) / 3);
             if (padding < 0)
             {
                 padding = 0;
@@ -25,17 +25,20 @@
             if (pos == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(new string(' ', padding) + $"> {str[0]}");
+                Console.WriteLine();
+                Console.Write(new string(' ', padding/2) + $"> {str[0]}" );
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($" {str[1]}");
                 Console.ResetColor();
-                Console.Write($"\t {str[1]}");
 
             }
             else
             {
                 Console.ResetColor();
-                Console.WriteLine(new string(' ', padding) + $"{str[0]}");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write($"\t> {str[1]}");
+                Console.WriteLine();
+                Console.Write(new string(' ', padding/2) + $"{str[0]}" );
+                Console.ForegroundColor= ConsoleColor.Green;
+                Console.Write($" > {str[1]}");
             }
             Console.ResetColor();
         }
@@ -117,30 +120,19 @@
                 key = Console.ReadKey();
                 if (key.Key == ConsoleKey.LeftArrow)
                 {
-                    if (pos3 == 0)
-                    {
-                        pos3 = 1;
-                    }
-                    else
-                    {
-                        pos3 = 0;
-                    }
+                    if (pos3 == 1)
+                        pos3--;
+                    
                 }
                 else if (key.Key == ConsoleKey.RightArrow)
                 {
-                    if (pos3 == 0)
-                    {
-                        pos3 = 1;
-                    }
-                    else
-                    {
-                        pos3 = 0;
-                    }
+                    if(pos3 == 0)
+                        pos3++;
                 }
             } while (key.Key != ConsoleKey.Enter);
 
 
-            if (pos == 1)
+            if (pos3 == 1)
             {
                 Console.WriteLine("Azione annullata");
                 Console.ResetColor();

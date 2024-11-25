@@ -48,18 +48,26 @@ namespace Biblioteca_Gruppo4.Cases
                 }
             }
 
-            Titoli[libri_unici] = titolo;
-
-
            
-            Console.WriteLine("Inserisci l'autore del libro");
-            Autori[libri_unici] = Console.ReadLine();
 
             try{Console.WriteLine("Inserisci il prezzo");
+                Titoli[libri_unici] = titolo;
+
+                Console.WriteLine("Inserisci l'autore del libro");
+                Autori[libri_unici] = Console.ReadLine();
+
                 prezzo[libri_unici] = double.Parse(Console.ReadLine());
-            }catch (Exception e)
+                Console.WriteLine("Inserisci la categoria");
+                categoria[libri_unici] = Console.ReadLine();
+
+                Console.WriteLine("Inserisci la casa editrice");
+                casa_editrice[libri_unici] = Console.ReadLine();
+ 
+                copie[libri_unici] = 1;
+            }
+            catch (Exception e)
             {
-                Console.WriteLine("Errore, prezzo non valido");
+                Console.WriteLine("Errore, Qualcosa é andato storto");
                 Console.ReadKey();
                 Array.Resize(ref Titoli, Titoli.Length - 1);
                 Array.Resize(ref Autori, Autori.Length - 1);
@@ -70,21 +78,45 @@ namespace Biblioteca_Gruppo4.Cases
                 return;
             }
 
-            Console.WriteLine("Inserisci la categoria");
-            categoria[libri_unici] = Console.ReadLine();
+            
 
-            Console.WriteLine("Inserisci la casa editrice");
-            casa_editrice[libri_unici] = Console.ReadLine();
 
-            copie[libri_unici] = 1;
+            
 
+
+            Console.WriteLine("Libro aggiunto con successo");
+            Console.ReadKey();
+
+            string[] strings =
+            {
+                $"Libro: ",
+                Titoli[libri_unici],
+                $"Autore: ",
+                Autori[libri_unici],
+                $"Prezzo: ",
+                prezzo[libri_unici].ToString(),
+                $"Categoria: ",
+                categoria[libri_unici],
+                $"Casa Editrice",
+                casa_editrice [libri_unici],
+                
+            };
+
+            Console.Clear();
+            int padding = 15;
+
+            for(int i=0; i < strings.Length; i+=2)
+            {
+                Console.Write(new string(' ', padding) + strings[i]);
+                int padding2 = Console.WindowHeight - (padding - strings[i].Length)/2;
+
+                Console.Write(new string(' ', padding2) + strings[i+1]);
+            }
 
             //Aumento libri unici
             libri_unici++;
             libri_unici_copia++;
 
-
-            Console.WriteLine("Libro aggiunto con successo");
             Console.ReadKey();
             return;
         }

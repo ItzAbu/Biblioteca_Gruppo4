@@ -75,8 +75,10 @@ namespace Biblioteca_Gruppo4.mainMenuWithArrows
             do
             {
                 Console.Clear();
+                Console.WriteLine();
                 Bibleoteca.Logo();
                 Menu(pos);
+                Console.WriteLine();
                 key = Console.ReadKey();
                 //Se premo freccia giú incremento la posizione quindi va all`opzione dopo
                 if (key.Key == ConsoleKey.DownArrow)

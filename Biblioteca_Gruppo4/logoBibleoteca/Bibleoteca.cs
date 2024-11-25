@@ -10,17 +10,20 @@
 
 
 
-            Console.WriteLine(new string(' ', padding) +" ▄▄▄▄    ██▓ ▄▄▄▄    ██▓    ▓█████  ▒█████  ▄▄▄█████▓▓█████  ▄████▄   ▄▄▄      ");
-            Console.WriteLine(new string(' ', padding) + "▓█████▄ ▓██▒▓█████▄ ▓██▒    ▓█   ▀ ▒██▒  ██▒▓  ██▒ ▓▒▓█   ▀ ▒██▀ ▀█  ▒████▄    ");
-            Console.WriteLine(new string(' ', padding) + "▒██▒ ▄██▒██▒▒██▒ ▄██▒██░    ▒███   ▒██░  ██▒▒ ▓██░ ▒░▒███   ▒▓█    ▄ ▒██  ▀█▄  ");
-            Console.WriteLine(new string(' ', padding) + "▒██░█▀  ░██░▒██░█▀  ▒██░    ▒▓█  ▄ ▒██   ██░░ ▓██▓ ░ ▒▓█  ▄ ▒▓▓▄ ▄██▒░██▄▄▄▄██ ");
-            Console.WriteLine(new string(' ', padding) + "░▓█  ▀█▓░██░░▓█  ▀█▓░██████▒░▒████▒░ ████▓▒░  ▒██▒ ░ ░▒████▒▒ ▓███▀ ░ ▓█   ▓██▒");
-            Console.WriteLine(new string(' ', padding) + "░▒▓███▀▒░▓  ░▒▓███▀▒░ ▒░▓  ░░░ ▒░ ░░ ▒░▒░▒░   ▒ ░░   ░░ ▒░ ░░ ░▒ ▒  ░ ▒▒   ▓▒█░");
-            Console.WriteLine(new string(' ', padding) + "▒░▒   ░  ▒ ░▒░▒   ░ ░ ░ ▒  ░ ░ ░  ░  ░ ▒ ▒░     ░     ░ ░  ░  ░  ▒     ▒   ▒▒ ░");
-            Console.WriteLine(new string(' ', padding) + " ░    ░  ▒ ░ ░    ░   ░ ░      ░   ░ ░ ░ ▒    ░         ░   ░          ░   ▒   ");
-            Console.WriteLine(new string(' ', padding) + " ░       ░   ░          ░  ░   ░  ░    ░ ░              ░  ░░ ░            ░  ░");
-            Console.WriteLine(new string(' ', padding) + "      ░           ░                                         ░                  ");
+            Console.WriteLine(new string(' ', padding) + " ▄▄▄▄    ██▓ ▄▄▄▄    ██▓     ██▓ ▒█████  ▄▄▄█████▓▓█████  ▄████▄   ▄▄▄      ");
+            Console.WriteLine(new string(' ', padding) + "▓█████▄ ▓██▒▓█████▄ ▓██▒    ▓██▒▒██▒  ██▒▓  ██▒ ▓▒▓█   ▀ ▒██▀ ▀█  ▒████▄    ");
+            Console.WriteLine(new string(' ', padding) + "▒██▒ ▄██▒██▒▒██▒ ▄██▒██░    ▒██▒▒██░  ██▒▒ ▓██░ ▒░▒███   ▒▓█    ▄ ▒██  ▀█▄  ");
+            Console.WriteLine(new string(' ', padding) + "▒██░█▀  ░██░▒██░█▀  ▒██░    ░██░▒██   ██░░ ▓██▓ ░ ▒▓█  ▄ ▒▓▓▄ ▄██▒░██▄▄▄▄██ ");
+            Console.WriteLine(new string(' ', padding) + "░▓█  ▀█▓░██░░▓█  ▀█▓░██████▒░██░░ ████▓▒░  ▒██▒ ░ ░▒████▒▒ ▓███▀ ░ ▓█   ▓██▒");
+            Console.WriteLine(new string(' ', padding) + "░▒▓███▀▒░▓  ░▒▓███▀▒░ ▒░▓  ░░▓  ░ ▒░▒░▒░   ▒ ░░   ░░ ▒░ ░░ ░▒ ▒  ░ ▒▒   ▓▒█░");
+            Console.WriteLine(new string(' ', padding) + "▒░▒   ░  ▒ ░▒░▒   ░ ░ ░ ▒  ░ ▒ ░  ░ ▒ ▒░     ░     ░ ░  ░  ░  ▒     ▒   ▒▒ ░");
+            Console.WriteLine(new string(' ', padding) + " ░    ░  ▒ ░ ░    ░   ░ ░    ▒ ░░ ░ ░ ▒    ░         ░   ░          ░   ▒   ");
+            Console.WriteLine(new string(' ', padding) + " ░       ░   ░          ░  ░ ░      ░ ░              ░  ░░ ░            ░  ░");
+            Console.WriteLine(new string(' ', padding) + "      ░           ░                                      ░                  ");
 
         }
     }
 }
+
+
+

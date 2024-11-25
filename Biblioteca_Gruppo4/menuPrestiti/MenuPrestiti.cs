@@ -10,10 +10,11 @@ namespace Biblioteca_Gruppo4.menuPrestiti
             string[] strings = {
                 "Prendi in prestito un libro",
                 "Riconsegna libro",
-                "Stampa tutti i libri in prestito"
+                "Stampa tutti i libri in prestito",
+                "Esci"
             };
 
-            Console.WriteLine("\n\n");
+            Console.WriteLine("\n");
 
             // Calcola la larghezza della console
 
@@ -57,17 +58,18 @@ namespace Biblioteca_Gruppo4.menuPrestiti
             do
             {
                 Console.Clear();
+                Console.WriteLine();
                 LogoPrestito.logoPrestito();
                 Menu(pos);
                 key = Console.ReadKey();
                 //Se premo freccia giú incremento la posizione quindi va all`opzione dopo
                 if (key.Key == ConsoleKey.DownArrow)
                 {
-                    if (pos < 3)
+                    if (pos < 4)
                     {
                         pos++;
                     }
-                    if(pos == 4)
+                    if(pos == 5)
                     {
                         pos = 1;
                     }
@@ -103,6 +105,13 @@ namespace Biblioteca_Gruppo4.menuPrestiti
                 case 3:
 
                     ShowBorrowesBooks.showBorrowedBooks(libri_prestito, utenti_prestito_nome, utenti_prestito_cognome, giorno_preso, tempo_trattenuto, codice_prestito, prestiti);
+
+                    break;
+
+                case 4:
+
+                    Console.Clear();
+                    Console.WriteLine("Premi per ritornare al menu principale");
 
                     break;
 
