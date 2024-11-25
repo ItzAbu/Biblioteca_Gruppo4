@@ -48,7 +48,6 @@ namespace Biblioteca_Gruppo4.Cases
                 }
             }
 
-           
 
             try{Console.WriteLine("Inserisci il prezzo");
                 Titoli[libri_unici] = titolo;
