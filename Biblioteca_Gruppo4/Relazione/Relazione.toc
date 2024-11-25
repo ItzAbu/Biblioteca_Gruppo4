@@ -1,0 +1,47 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Struttura}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Menu Principale}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Prestiti}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Menu Principale}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Gestione Array}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Visual}{5}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}MenuArrow.cs}{6}{subsubsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.3}AddBook.cs}{8}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Step 1}{8}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Step 2}{9}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Step 3}{10}{subsubsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.4}ShowBook.cs}{11}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Step 1}{11}{subsubsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.5}RemoveBook.cs}{12}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Step 1}{12}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}Step 2}{12}{subsubsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.3}Step 3}{13}{subsubsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.6}SearchByAuthor.cs}{14}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Step 1}{14}{subsubsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.2}Step 2}{15}{subsubsection.2.6.2}%
+\contentsline {subsubsection}{\numberline {2.6.3}Step 3}{15}{subsubsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.7}MostExpeBook.cs}{16}{subsection.2.7}%
+\contentsline {subsubsection}{\numberline {2.7.1}Step 1}{16}{subsubsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.8}Reorder.cs}{17}{subsection.2.8}%
+\contentsline {subsubsection}{\numberline {2.8.1}Step 1}{17}{subsubsection.2.8.1}%
+\contentsline {subsubsection}{\numberline {2.8.2}Step 2}{17}{subsubsection.2.8.2}%
+\contentsline {subsubsection}{\numberline {2.8.3}Step 3}{18}{subsubsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.9}PriceRange.cs}{19}{subsection.2.9}%
+\contentsline {subsubsection}{\numberline {2.9.1}Step 1}{19}{subsubsection.2.9.1}%
+\contentsline {section}{\numberline {3}Prestiti}{20}{section.3}%
+\contentsline {subsection}{\numberline {3.1}MenuPrestiti.cs}{20}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Step 1}{20}{subsubsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.2}TakeBorrow.cs}{22}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Step 1}{22}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Step 2}{23}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Step 3}{24}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}ReturnBook.cs}{25}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Step 1}{25}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Step 2}{26}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Step 3}{27}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.4}ShowBorrowedBooks.cs}{28}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Step 1}{28}{subsubsection.3.4.1}%
+\contentsline {section}{\numberline {4}Utils e Logo}{29}{section.4}%
+\contentsline {subsection}{\numberline {4.1}ToLower.cs}{29}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}LogoBiblioteca.cs || LogoPrestito.cs}{29}{subsection.4.2}%

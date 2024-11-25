@@ -8,33 +8,64 @@ namespace Biblioteca_Gruppo4.Cases
 {
     internal class RemoveBook
     {
+        public static void Menu(int pos, string[] Titoli, int[] copie) {
+            Console.Clear();
+            Console.WriteLine("Scegli un libro da rimuovere");
+            Console.WriteLine();
+
+            for(int i=0; i<Titoli.Length; i++)
+            {
+                if (i == pos-1)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"> [{i+1}] {Titoli[i]} - Copie: {copie[i]}");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.WriteLine($"  [{i+1}] {Titoli[i]} - Copie: {copie[i]}");
+                }
+            }
+        }
+
+
         public static void removeBook(ref string[] Titoli, ref string[] Autori, ref double[] prezzo, ref string[] categoria, ref string[] casa_editrice, ref int[] copie, ref int libri_unici, ref int libri_unici_copia)
         {
-            Console.Clear();
-            Console.WriteLine("Elenco dei libri, decidi quale libro vuoi eliminare in base al numero");
-            for (int i = 0; i < Titoli.Length; i++)
-            {
-                Console.WriteLine($"[{i + 1}] {Titoli[i]} x{copie[i]}");
-            }
+            ConsoleKeyInfo key;
+            int lettura = 1;
+            do{
+                Menu(lettura, Titoli, copie);
+                key = Console.ReadKey();
 
-            Console.WriteLine("Seleziona il libro da eliminare, scegli il numero");
-            int lettura;
-            try
-            {
-                lettura = int.Parse(Console.ReadLine());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Scelta errata");
-                Console.ReadKey();
-                return;
-            }
+                if(key.Key == ConsoleKey.DownArrow)
+                {
+                    if(lettura == Titoli.Length)
+                    {
+                        lettura = 1;
+                    }
+                    else
+                    {
+                        lettura++;
+                    }
+                }
+                else if(key.Key == ConsoleKey.UpArrow)
+                {
+                    if(lettura == 1)
+                    {
+                        lettura = Titoli.Length;
+                    }
+                    else
+                    {
+                        lettura--;
+                    }
+                }
+            }while(key.Key != ConsoleKey.Enter);
 
 
             if (copie[lettura - 1] > 1)
             {
                 copie[lettura - 1]--;
-
+                Console.Clear();
                 Console.WriteLine("Copia eliminata con successo");
                 Console.ReadKey();
                 Console.Clear();

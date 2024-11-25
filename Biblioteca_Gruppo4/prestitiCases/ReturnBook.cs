@@ -59,7 +59,6 @@
                 return;
             }
 
-            //int pos = Array.IndexOf(codice_prestito, codice);
             int pos;
             //Flag codice non presente
             bool flag = false;

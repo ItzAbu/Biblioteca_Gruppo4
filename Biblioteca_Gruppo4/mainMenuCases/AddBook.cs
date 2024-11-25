@@ -48,20 +48,21 @@ namespace Biblioteca_Gruppo4.Cases
                 }
             }
 
-
-            try{Console.WriteLine("Inserisci il prezzo");
+            try{
                 Titoli[libri_unici] = titolo;
 
                 Console.WriteLine("Inserisci l'autore del libro");
                 Autori[libri_unici] = Console.ReadLine();
 
+                Console.WriteLine("Inserisci il prezzo");
                 prezzo[libri_unici] = double.Parse(Console.ReadLine());
+
                 Console.WriteLine("Inserisci la categoria");
                 categoria[libri_unici] = Console.ReadLine();
 
                 Console.WriteLine("Inserisci la casa editrice");
                 casa_editrice[libri_unici] = Console.ReadLine();
- 
+
                 copie[libri_unici] = 1;
             }
             catch (Exception e)
@@ -106,10 +107,17 @@ namespace Biblioteca_Gruppo4.Cases
 
             for(int i=0; i < strings.Length; i+=2)
             {
+                
                 Console.Write(new string(' ', padding) + strings[i]);
                 int padding2 = Console.WindowHeight - (padding - strings[i].Length)/2;
 
-                Console.Write(new string(' ', padding2) + strings[i+1]);
+                Console.Write(new string(' ', padding2-i) + strings[i+1]);
+
+                if(i == 4)
+                {
+                    Console.Write(" Eur");
+                }
+                Console.WriteLine();
             }
 
             //Aumento libri unici

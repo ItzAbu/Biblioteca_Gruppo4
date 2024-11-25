@@ -110,12 +110,8 @@ namespace Biblioteca_Gruppo4.prestitiCases
             do
             {
                 
-
                 Menu(strings, pos);
                 key = Console.ReadKey();
-
-                
-
 
                 //Freccie
                 if (key.Key == ConsoleKey.DownArrow)

@@ -1,0 +1,1487 @@
+\documentclass[a4paper,12pt]{article}
+
+% Pacchetti utili
+\usepackage[utf8]{inputenc}  % Codifica UTF-8
+\usepackage[italian]{babel} % Lingua italiana
+\usepackage{amsmath, amssymb} % Simboli matematici
+\usepackage{graphicx} % Per inserire immagini
+\usepackage{hyperref} % Link cliccabili
+\usepackage{listings} % Codice sorgente
+\usepackage{xcolor} % Colori personalizzati
+
+\usepackage{xcolor}
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0} % Verde scuro personalizzato
+
+
+% Configurazione per il codice
+\lstset{
+  language=[Sharp]C, % Linguaggio C#
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  frame=single,
+  breaklines=true,
+  captionpos=b,
+  showspaces=false,
+  showstringspaces=false,
+  morekeywords={async, await, var, dynamic, get, set, value}, % Aggiungi parole chiave specifiche di C#
+}
+
+\usepackage[a4paper, top=1.5cm, bottom=1.5cm, left=1cm, right=1cm]{geometry}
+
+
+
+\title{Relazione del Progetto di Informatica}
+\author{Abu Shahid Islam \& Giovanni Sebastiani}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents % Genera un indice dei contenuti
+
+\newpage
+
+\section{Struttura} 
+Il programma è diviso in 2 \textbf{Menu} principali:
+\begin{itemize}
+    \subsection{Menu Principale}
+        \item Qui l'utente può scegliere tra 9 opzioni: \begin{itemize}
+        \item \textbf{Aggiungi un libro}
+        \item \textbf{Visualizza i libri}
+        \item \textbf{Rimuovi un libro}
+        \item \textbf{Cerca un libro per autore}
+        \item \textbf{Libro più costoso}
+        \item \textbf{Ordina libri in base al prezzo}
+        \item \textbf{Visualizza per fascia di prezzo}
+        \item \textbf{Prestiti}
+        \item \textbf{Esci}
+    \end{itemize}
+    \subsection{Prestiti}
+    \item Qui l'utente può scegliere tra 4 opzioni: \begin{itemize}
+        \item \textbf{Prendi in prestito}
+        \item \textbf{Restituisci il prestito}
+        \item \textbf{Visualizza i libri in prestito}
+        \item \textbf{Esci}
+    \end{itemize}.
+    \item Questo programma anche se fatto con Array statici (Array a dimensione fissa) dá la possibilità all'utente illimitati libri
+\end{itemize}
+
+
+\newpage
+
+
+\section{Menu Principale}
+\subsection{Gestione Array}
+Funzionamento del Menu Principale:
+\begin{itemize}
+    \item Chiamato \textbf{Program.cs} contiene il \textit{main}.
+    \item Il main contiene tutti gli array per la gestione della libreria
+    \item \begin{lstlisting}[caption=Array della libreria]
+string[] Titoli = new string[2];
+string[] Autori = new string[2];
+double[] prezzo = new double[2];
+string[] categoria = new string[2];
+string[] casa_editrice = new string[2];
+int[] copie = new int[2];
+        \end{lstlisting}
+    \item Contiene gli array per la gestione dei prestiti
+    \item \begin{lstlisting}[caption=Array dei prestiti]
+int prestiti = 0;
+string[] libri_prestito = new string[2];
+string[] utenti_prestito_nome = new string[2];
+string[] utenti_prestito_cognome = new string[2];
+string[] giorno_preso = new string[2];
+string[] tempo_trattenuto = new string[2];
+int[] codice_prestito = new int[2];
+int retuns = 0;
+    \end{lstlisting}
+
+    \item Alcune funzioni necessitano il numero di libri presenti nella libreria
+    \item \begin{lstlisting}[caption=Funzione per il numero di libri]
+int libri_unici = 0;
+int libri_unici_copia = 0;
+    \end{lstlisting}
+\end{itemize}
+
+\newpage
+
+\subsection{Visual}
+\begin{itemize}
+    \item Tutta la parte visuale è gestita da un menu comandabile con le freccie \textbf{\textit{MenuArrow.cs}}. \newline Questa funzione ha come \textcolor{blue}{\textit{return}} la scelta dell'utente.
+    \item In base alla scelta viene scelta la funzione da eseguire.
+    \item \begin{lstlisting}[caption=Funzione per il menu]
+        //Menu
+while (true)
+{
+    Console.Clear();
+       
+    //Menu con le freccie
+    int scelta = MenuArrow.menuArrow();
+       
+    switch (scelta)
+    {
+        case 1:
+                    
+            AddBook.addBook(ref Titoli, ref Autori, ref prezzo, ref categoria, ref casa_editrice, ref copie, ref libri_unici, ref libri_unici_copia);
+            break;
+       
+        case 2:
+                    
+            ShowBook.showBook(Titoli, copie);
+            break;
+       
+        case 3:
+                    
+            RemoveBook.removeBook(ref Titoli, ref Autori, ref prezzo, ref categoria, ref casa_editrice, ref copie, ref libri_unici, ref libri_unici_copia);
+            break;
+       
+        case 4:
+                    
+            SearchByAuthor.searchByAuthor(Titoli, Autori, copie);
+            break;
+        case 5:
+                    
+            MostExpeBook.mostExpeBook(Titoli, prezzo);
+            break;
+       
+        case 6:
+       
+            Reorder.reorder(ref Titoli, ref Autori, ref prezzo, ref categoria, ref casa_editrice, ref copie);
+            break;
+       
+        case 7:
+       
+            PriceRange.priceRange(Titoli, prezzo, copie);
+            break;
+       
+        case 8:
+                    
+            MenuPrestiti.menuPrestiti(Titoli, Autori, prezzo, categoria, casa_editrice, copie, ref libri_unici_copia , ref prestiti, ref libri_prestito, 
+                ref utenti_prestito_nome, ref utenti_prestito_cognome, ref giorno_preso, ref tempo_trattenuto, ref codice_prestito, ref retuns);
+            break;
+       
+        case 9:
+       
+            Console.Clear();
+            Console.WriteLine("Arrivederci!");
+            Console.ReadKey();
+       
+            return;
+    }
+       
+}
+        
+    \end{lstlisting}
+\end{itemize}
+
+\newpage
+
+\subsubsection{MenuArrow.cs}
+Questa funzione permette di navigare nel menu con le frecce.
+Le frecce funzionano tramite un array \textcolor{blue}{strings} che contiene le scelte del menu.
+Un intero \textcolor{blue}{pos} che indica la posizione attuale nel menu;
+e leggendo il tasto premuto, se è una freccia, cambia la posizione.
+
+
+Nel seguente codice si può vedere come funziona la chat colorata e la freccia che indica la scelta dell'utente.
+\begin{lstlisting}[caption=MenuArrow.cs]
+    //Stampa il menu
+static public void Menu(int pos)
+{
+    // Menu
+    string[] strings =
+    {
+    "Inserisci un libro",
+    "Consulta tutti i libri della biblioteca",
+    "Rimuovi un libro",
+    "Ricerca libri per autore",
+    "Stampa libro piu costoso",
+    "Ordina i libri in base al prezzo",
+    "Stampa i libri per fascia di prezzo",
+    "Prestito",
+    "Esci"
+    };
+
+    // Calcola la larghezza della console
+
+    int consoleWidth = Console.WindowWidth; 
+
+    for (int i = 0; i < strings.Length; i++)
+    {
+        // Calcola il numero di spazi iniziali per centrare la stringa
+        int padding = (consoleWidth - strings[i].Length) / 2;
+
+        // Assicurati che il padding sia almeno 0
+        if(padding < 0)
+        {
+            padding = 0;
+        }
+
+
+        // Colore verde per l'opzione selezionata
+        if (i == pos - 1)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(new string(' ', padding) + $"> {strings[i]}");
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(new string(' ', padding) + $"  {strings[i]}");
+        }
+    }
+
+    // Resetta il colore
+    Console.ResetColor();
+}
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{Console.WindowWidth}} restituisce la larghezza della console.
+    \item \textcolor{blue}{\textbf{Console.ForegroundColor}} cambia il colore del testo.
+    \item \textcolor{blue}{\textbf{Console.ResetColor}} resetta il colore del testo.
+    \item \textcolor{blue}{\textbf{padding}} calcola il numero di spazi iniziali per centrare la stringa.
+    \item \textcolor{blue}{\textbf{new string(' ', padding)}} crea una stringa di spazi in base al padding.
+\end{itemize}
+
+
+
+\newpage
+
+Invece qui si può vedere come funziona la freccia e la scelta dell'utente.
+
+\begin{lstlisting} [caption=MenuArrow.cs]
+//Stampa il menu con la freccia
+
+static public int menuArrow()
+{
+    //Leggo il tasto premuto
+    ConsoleKeyInfo key;
+    int pos = 1;
+    do
+    {
+        Console.Clear();
+        Console.WriteLine();
+        Bibleoteca.Logo();
+        Menu(pos);
+        Console.WriteLine();
+        key = Console.ReadKey();
+        Se premo freccia giu incremento la posizione quindi va all opzione dopo
+        if (key.Key == ConsoleKey.DownArrow)
+        {
+            if (pos < 9)
+            {
+                pos++;
+            }
+        }
+        //Se premo freccia su decremento la posizione quindi va all`opzione prima
+        else if (key.Key == ConsoleKey.UpArrow)
+        {
+            if (pos > 1)
+            {
+                pos--;
+            }
+        }
+    } while (key.Key != ConsoleKey.Enter);
+    return pos;
+}
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{ConsoleKeyInfo}} legge il tasto premuto.
+    \item \textcolor{blue}{\textbf{Console.Clear}} pulisce la console.
+    \item \textcolor{blue}{\textbf{Console.ReadKey}} legge il tasto premuto.
+    \item \textcolor{blue}{\textbf{ConsoleKey.DownArrow}} controlla se è stata premuta la freccia giù.
+    \item \textcolor{blue}{\textbf{ConsoleKey.UpArrow}} controlla se è stata premuta la freccia su.
+    \item \textcolor{blue}{\textbf{ConsoleKey.Enter}} controlla se è stato premuto il tasto invio.
+    \item \textcolor{blue}{\textbf{pos}} indica la scelta corrente.
+\end{itemize}
+
+
+\newpage
+
+\subsection{AddBook.cs}
+\begin{itemize}
+    \item Questa funzione permette di aggiungere un libro alla libreria.
+    \item 
+    \subsubsection{Step 1}
+        Primo step è controllare se ci sono posti disponibili dove mettere i libri.
+        In caso contrario, il programma crea un nuovo spazio tramite \textcolor{darkgreen}{\textit{Array}}\textcolor{yellow}{\textit{.Resize}}.
+
+\begin{lstlisting}[caption=Controllo spazio disponibile]
+Console.Clear();
+//Se abbiamo raggiunto il massimo
+if (libri_unici == Titoli.Length)
+{
+    //Resize degli array
+                    
+    Array.Resize(ref Titoli, Titoli.Length + 1);
+    Array.Resize(ref Autori, Autori.Length + 1);
+    Array.Resize(ref prezzo, prezzo.Length + 1);
+    Array.Resize(ref categoria, categoria.Length + 1);
+    Array.Resize(ref casa_editrice, casa_editrice.Length + 1);
+    Array.Resize(ref copie, copie.Length + 1);                 
+}
+\end{lstlisting}
+
+    \newpage
+
+    \subsubsection{Step 2}
+    
+    \item Inserimento dei dati del libro.
+    \item Il programma controlla all'inserimento se il libro è già presente.
+    \item in caso sia un libro nuovo chiede le altre informazioni.
+    \item Se avviene qualche errore, Es. inserimento di una \textcolor{blue}{stringa} al posto di un \textcolor{blue}{double}, il programma annulla l'inserimento.
+        
+    
+\end{itemize}
+
+\begin{lstlisting}[caption=Inserimento dei dati]
+Console.WriteLine("Inserisci il titolo del libro");
+string titolo = Console.ReadLine();
+
+    //Libro gia presente o meno
+
+for (int i = 0; i < Titoli.Length; i++)
+{
+    if (Titoli[i] == null)
+    {
+        continue;
+    }
+    if (ToLower.ToLowerString(Titoli[i]) == ToLower.ToLowerString(titolo))
+    {
+        copie[i]++;
+        Console.WriteLine("Il libro e gia presente nei nostri archivi, non servono le altre informazioni");
+        Console.ReadKey();
+        return;
+    }
+}
+
+try{
+    Titoli[libri_unici] = titolo;
+
+    Console.WriteLine("Inserisci l'autore del libro");
+    Autori[libri_unici] = Console.ReadLine();
+
+    Console.WriteLine("Inserisci il prezzo");
+    prezzo[libri_unici] = double.Parse(Console.ReadLine());
+
+    Console.WriteLine("Inserisci la categoria");
+    categoria[libri_unici] = Console.ReadLine();
+
+    Console.WriteLine("Inserisci la casa editrice");
+    casa_editrice[libri_unici] = Console.ReadLine();
+
+    copie[libri_unici] = 1;
+}
+catch (Exception e)
+{
+    Console.WriteLine("Errore, Qualcosa e andato storto");
+    Console.ReadKey();
+    Array.Resize(ref Titoli, Titoli.Length - 1);
+    Array.Resize(ref Autori, Autori.Length - 1);
+    Array.Resize(ref prezzo, prezzo.Length - 1);
+    Array.Resize(ref categoria, categoria.Length - 1);
+    Array.Resize(ref casa_editrice, casa_editrice.Length - 1);
+    Array.Resize(ref copie, copie.Length - 1);
+    return;
+}
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{Array.Resize}} aumenta/diminuisce la dimensione dell'array.
+\end{itemize}
+
+\newpage
+
+\subsubsection{Step 3}
+\begin{itemize}
+    \item Ultimo step è la stampa dei dati inseriti
+\end{itemize}
+\begin{lstlisting}[caption={Stampa dei dati inseriti}]
+Console.WriteLine("Libro aggiunto con successo");
+Console.ReadKey();
+
+string[] strings =
+{
+    $"Libro: ",
+    Titoli[libri_unici],
+    $"Autore: ",
+    Autori[libri_unici],
+    $"Prezzo: ",
+    prezzo[libri_unici].ToString(),
+    $"Categoria: ",
+    categoria[libri_unici],
+    $"Casa Editrice",
+    casa_editrice [libri_unici],
+        
+};
+
+Console.Clear();
+int padding = 15;
+
+for(int i=0; i < strings.Length; i+=2)
+{
+        
+    Console.Write(new string(' ', padding) + strings[i]);
+    int padding2 = Console.WindowHeight - (padding - strings[i].Length)/2;
+
+    Console.Write(new string(' ', padding2-i) + strings[i+1]);
+
+    if(i == 4)
+    {
+        Console.Write(" Eur");
+    }
+    Console.WriteLine();
+}
+
+//Aumento libri unici
+libri_unici++;
+libri_unici_copia++;
+
+Console.ReadKey();
+    
+\end{lstlisting}
+
+
+\newpage
+
+\subsection{ShowBook.cs}
+\subsubsection{Step 1}
+Lo scopo di questa funzione è di visualizzare tutti i libri presenti nella libreria.
+
+Questa funzione mostra un menu con tutti i libro, e alla selezione di ogni libro, mostra le informazioni di quel libro.
+Il modo di funzionare è simile al menu principale, ma con l'obbiettivo di visualizzare i libri.
+
+\begin{lstlisting}
+public static void Menu(int pos, string[] Titoli) 
+{
+    Console.Clear();
+    Console.WriteLine("Indice Libri");
+
+    for(int i=0; i<Titoli.Length; i++)
+    {
+        if (i == pos-1)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"> [{i+1}] {Titoli[i]}");
+            Console.ResetColor();
+        }
+        else
+        {
+            Console.WriteLine($"  [{i+1}] {Titoli[i]}");
+        }
+    }
+
+}
+
+public static void showBook(string[] Titoli, int[] copie, string[] Autori, double[] prezzo, string[] categoria, string[] casa_editrice)
+{
+            
+    ConsoleKeyInfo key;
+    int pos = 1;
+    do{
+        Menu(pos, Titoli);
+        key = Console.ReadKey();
+
+        if(key.Key == ConsoleKey.DownArrow)
+        {
+            if(pos == Titoli.Length)
+            {
+                pos = 1;
+            }
+            else
+            {
+                pos++;
+            }
+        }
+        else if(key.Key == ConsoleKey.UpArrow)
+        {
+            if(pos == 1)
+            {
+                pos = Titoli.Length;
+            }
+            else
+            {
+                pos--;
+            }
+        }
+    }while(key.Key != ConsoleKey.Enter);
+
+    Console.Clear();
+
+    //Stampa libri
+    Console.WriteLine("Titolo: " + Titoli[pos-1]);
+    Console.WriteLine("Autore: " + Autori[pos-1]);
+    Console.WriteLine("Prezzo: " + prezzo[pos-1] + "Eur");
+    Console.WriteLine("Categoria: " + categoria[pos-1]);
+    Console.WriteLine("Casa Editrice: " + casa_editrice[pos-1]);
+    Console.WriteLine("Copie: " + copie[pos-1]);
+
+    Console.WriteLine("Premi un tasto per tornare al menu");
+    Console.ReadKey();
+
+    return;
+}
+
+\end{lstlisting}
+
+\subsection{RemoveBook.cs}
+\subsubsection{Step 1}
+Lo scopo di questa funzione è di rimuovere un libro dalla libreria.
+Funziona con lo stesso identico schema di Menu visto precedentemente.
+Ogni libro ha un numero associato, e alla selezione di quel numero, il libro viene rimosso.
+In caso ci sia piú di una copia elimina prima una copia, e poi il libro.
+
+\begin{lstlisting}
+public static void removeBook(ref string[] Titoli, ref string[] Autori, ref double[] prezzo, ref string[] categoria, ref string[] casa_editrice, ref int[] copie, ref int libri_unici, ref int libri_unici_copia)
+{
+    ConsoleKeyInfo key;
+    int lettura = 1;
+    do{
+        Menu(lettura, Titoli, copie);
+        key = Console.ReadKey();
+
+        if(key.Key == ConsoleKey.DownArrow)
+        {
+            if(lettura == Titoli.Length)
+            {
+                lettura = 1;
+            }
+            else
+            {
+                lettura++;
+            }
+        }
+        else if(key.Key == ConsoleKey.UpArrow)
+        {
+            if(lettura == 1)
+            {
+                lettura = Titoli.Length;
+            }
+            else
+            {
+                lettura--;
+            }
+        }
+    }while(key.Key != ConsoleKey.Enter);
+}
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{Menu}} è la funzione che stampa il menu.
+    \item \textcolor{blue}{\textbf{ConsoleKey.DownArrow}} controlla se è stata premuta la freccia giù.
+    \item \textcolor{blue}{\textbf{ConsoleKey.UpArrow}} controlla se è stata premuta la freccia su.
+    \item \textcolor{blue}{\textbf{ConsoleKey.Enter}} controlla se è stato premuto il tasto invio.
+\end{itemize}
+
+\subsubsection{Step 2}
+
+Eliminazione copia
+
+\begin{lstlisting}
+    if (copie[lettura - 1] > 1)
+    {
+        copie[lettura - 1]--;
+        Console.Clear();
+        Console.WriteLine("Copia eliminata con successo");
+        Console.ReadKey();
+        Console.Clear();
+        return;
+
+    }
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{copie[lettura - 1] > 1}} controlla se ci sono piú di una copia.
+    \item \textcolor{blue}{\textbf{copie[lettura - 1]--}} elimina una copia.
+    \item \textcolor{blue}{\textbf{Console.Clear}} pulisce la console.
+\end{itemize}
+
+\newpage
+
+\subsubsection{Step 3}
+
+Eliminazione libro
+\begin{lstlisting}
+    Titoli[lettura - 1] = "";
+    Autori[lettura - 1] = "";
+    prezzo[lettura - 1] = 0;
+    categoria[lettura - 1] = "";
+    casa_editrice[lettura - 1] = "";
+    copie[lettura - 1] = 0;
+
+    for (int i = lettura - 1; i < Titoli.Length - 1; i++)
+    {
+        string temp;
+        int tempint;
+        double tempdouble;
+
+        temp = Titoli[i + 1];
+        Titoli[i] = temp;
+
+        temp = Autori[i + 1];
+        Autori[i] = temp;
+
+        tempdouble = prezzo[i + 1];
+        prezzo[i] = tempdouble;
+
+        temp = categoria[i + 1];
+        categoria[i] = temp;
+
+        temp = casa_editrice[i + 1];
+        casa_editrice[i] = temp;
+
+        tempint = copie[i + 1];
+        copie[i] = tempint;
+    }
+
+    //Resize degli array
+    Array.Resize(ref Titoli, Titoli.Length - 1);
+    Array.Resize(ref Autori, Autori.Length - 1);
+    Array.Resize(ref prezzo, prezzo.Length - 1);
+    Array.Resize(ref categoria, categoria.Length - 1);
+    Array.Resize(ref casa_editrice, casa_editrice.Length - 1);
+    Array.Resize(ref copie, copie.Length - 1);
+
+    libri_unici--;
+    libri_unici_copia--;
+
+    Console.Clear();
+    Console.WriteLine("Il libro e stato eliminato");
+    Console.ReadKey();
+    Console.Clear();
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{Titoli[lettura - 1] = ""}} elimina il titolo.
+    \item \textcolor{blue}{\textbf{Array.Resize}} diminuisce la dimensione dell'array.
+    \item \textcolor{blue}{\textbf{libri\_unici--}} diminuisce il numero di libri unici.
+    \item \textcolor{blue}{\textbf{libri\_unici\_copia--}} diminuisce il numero di libri unici copia.
+\end{itemize}
+
+\newpage
+
+\subsection{SearchByAuthor.cs}
+\subsubsection{Step 1}
+Menu (guardare sopra per spiegazione) e ricerca per autore.
+
+Il seguente codice, crea un array con tutti gli autori presenti, e permette di scegliere un autore.
+
+\begin{lstlisting}
+static public void searchByAuthor(string[] Titoli, string[] Autori, int[] copie)
+{
+    Console.Clear();
+    Console.WriteLine("Autori Presenti");
+
+    string[] autori_unici = new string[1];
+
+    //Metto dentro l`array tutti i autori 
+    for (int i = 0; i < Autori.Length; i++)
+    {
+        if(Autori[i] == null) {
+            continue;
+        }
+        //Controllo che non ci siano doppioni
+        bool doppione = false;
+        for (int j = 0; j < autori_unici.Length; j++)
+        {
+            if (autori_unici[j] == null)
+            {
+                autori_unici[j] = Autori[i];
+                break;
+            }
+                    
+            if (ToLower.ToLowerString(Autori[i]) == ToLower.ToLowerString(autori_unici[j]))
+            {
+                doppione = true;
+                break;
+            }
+        }
+
+        if (!doppione)
+        {
+            Array.Resize(ref autori_unici, autori_unici.Length + 1);
+            autori_unici[autori_unici.Length - 1] = Autori[i];
+        }
+
+    }
+
+    if(Autori[0] == null)
+    {
+        Console.WriteLine("Nessun autore presente");
+        Console.ReadKey();
+        return;
+    }
+
+    
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{autori\_unici}} contiene tutti gli autori presenti.
+    \item \textcolor{blue}{\textbf{ToLower.ToLowerString}} trasforma la stringa in minuscolo.
+    \item \textcolor{blue}{\textbf{Array.Resize}} aumenta la dimensione dell'array.
+\end{itemize}
+
+\newpage
+
+
+\subsubsection{Step 2}
+Gestore della scelta dell'autore
+
+\begin{lstlisting}
+    //Stampo
+    ConsoleKeyInfo key;
+    int scelta = 1;
+    do{
+        Menu(scelta, autori_unici);
+        key = Console.ReadKey();
+
+        if(key.Key == ConsoleKey.DownArrow)
+        {
+            if(scelta == autori_unici.Length)
+            {
+                scelta = 1;
+            }
+            else
+            {
+                scelta++;
+            }
+        }
+        else if(key.Key == ConsoleKey.UpArrow)
+        {
+            if(scelta == 1)
+            {
+                scelta = autori_unici.Length;
+            }
+            else
+            {
+                scelta--;
+            }
+        }
+    }while(key.Key != ConsoleKey.Enter);
+
+    
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{Menu}} è la funzione che stampa il menu.
+    \item \textcolor{blue}{\textbf{ConsoleKey.DownArrow}} controlla se è stata premuta la freccia giù.
+    \item \textcolor{blue}{\textbf{ConsoleKey.UpArrow}} controlla se è stata premuta la freccia su.
+    \item \textcolor{blue}{\textbf{ConsoleKey.Enter}} controlla se è stato premuto il tasto invio.
+    \item \textcolor{blue}{\textbf{scelta}} indica la scelta dell'utente.
+\end{itemize}
+
+\subsubsection{Step 3}
+
+Stampa dei libri dell'autore scelto, tramite un ciclo \textcolor{blue}{for} che controlla gli autori di tutti i libri e in caso affermativo stampa
+
+\begin{lstlisting}
+    //Stampo i libri dell`autore scelto
+    Console.Clear();
+    Console.WriteLine($"Libri di {autori_unici[scelta - 1]}");
+    int pos = 0;
+    for (int i = 0; i < Autori.Length; i++)
+    {
+        if (ToLower.ToLowerString(Autori[i]) == ToLower.ToLowerString(autori_unici[scelta - 1]))
+        {
+            Console.WriteLine($"[{pos + 1}] {Titoli[i]} \t x{copie[i]}");
+            pos++;
+        }
+                
+    }
+
+    Console.ReadKey();
+    return;
+}
+\end{lstlisting}
+
+\newpage
+
+\subsection{MostExpeBook.cs}
+\subsubsection{Step 1}
+
+Lo scopo di questa funzione è di trovare il libro piú costoso.
+Cerca la posizione del prezzo piu alto e stampa il libro.
+
+\begin{lstlisting}
+public static void mostExpeBook(string[] Titoli, double[] prezzo)
+{
+    Console.Clear();
+    double max = -1;
+    int pos = 0;
+
+    for (int i = 0; i < prezzo.Length; i++)
+    {
+        if (prezzo[i] > max)
+        {
+            max = prezzo[i];
+            pos = i;
+        }
+    }
+
+    Console.WriteLine($"Il libro piu costoso: {Titoli[pos]} \t {prezzo[pos]} Eur");
+    Console.ReadKey();
+    return;
+}
+\end{lstlisting}
+
+\newpage
+
+\subsection{Reorder.cs}
+\subsubsection{Step 1}
+Lo scopo di questa funzione è di ordinare i libri in base al prezzo.
+Viene usato un algoritmo di ordinamento \textcolor{blue}{Bubble Sort}.
+Si ha una scelta tra ordinamento crescente e decrescente.
+
+Menu
+\begin{lstlisting}
+    Console.Clear();
+    Console.WriteLine("Scegli come riordinare");
+    Console.WriteLine("[1] Crescente \t [2] Decrescente");
+    int scelta;
+    try
+    {
+        scelta = int.Parse(Console.ReadLine());
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Errore: Inserire un numero valido");
+        Console.ReadKey();
+        return;
+    }
+
+    if(scelta != 1 && scelta != 2)
+    {
+        Console.WriteLine("Errore: Inserire un numero valido");
+        Console.ReadKey();
+        return;
+    }
+\end{lstlisting}
+
+\subsubsection{Step 2}
+Ordinamento crescente 
+\begin{lstlisting}
+if (scelta == 1)
+    {
+        for(int i = 0; i < prezzo.Length-1; i++)
+        {
+            for (int j = i + 1; j < prezzo.Length; j++)
+            {
+                if (prezzo[i] > prezzo[j])
+                {
+
+                    string temp = Titoli[i];
+                    Titoli[i] = Titoli[j];
+                    Titoli[j] = temp;
+
+                    temp = Autori[i];
+                    Autori[i] = Autori[j];
+                    Autori[j] = temp;
+
+                    double temp2 = prezzo[i];
+                    prezzo[i] = prezzo[j];
+                    prezzo[j] = temp2;
+
+                    temp = categoria[i];
+                    categoria[i] = categoria[j];
+                    categoria[j] = temp;
+
+                    temp = casa_editrice[i];
+                    casa_editrice[i] = casa_editrice[j];
+                    casa_editrice[j] = temp;
+
+                    int temp3 = copie[i];
+                    copie[i] = copie[j];
+                    copie[j] = temp3;
+                }
+            }
+        }
+    }
+\end{lstlisting}
+
+\newpage
+Ordinamento Decrescente
+\begin{lstlisting}
+    if (scelta == 1)
+    {
+        for(int i = 0; i < prezzo.Length-1; i++)
+        {
+            for (int j = i + 1; j < prezzo.Length; j++)
+            {
+                if (prezzo[i] < prezzo[j])
+                {
+
+                    string temp = Titoli[i];
+                    Titoli[i] = Titoli[j];
+                    Titoli[j] = temp;
+
+                    temp = Autori[i];
+                    Autori[i] = Autori[j];
+                    Autori[j] = temp;
+
+                    double temp2 = prezzo[i];
+                    prezzo[i] = prezzo[j];
+                    prezzo[j] = temp2;
+
+                    temp = categoria[i];
+                    categoria[i] = categoria[j];
+                    categoria[j] = temp;
+
+                    temp = casa_editrice[i];
+                    casa_editrice[i] = casa_editrice[j];
+                    casa_editrice[j] = temp;
+
+                    int temp3 = copie[i];
+                    copie[i] = copie[j];
+                    copie[j] = temp3;
+                }
+            }
+        }
+    }    
+\end{lstlisting}
+
+\subsubsection{Step 3}
+Stampa dei libri ordinati
+\begin{lstlisting}
+    Console.WriteLine("Libri riordinati con successo. Premere un tasto per continuare");
+    Console.ReadKey();
+    Console.Clear();
+    Console.WriteLine("Indice  - Titolo - Autore - Prezzo - Categoria - Casa Editrice - Copie");
+    for (int  i = 0;  i < Titoli.Length;  i++)
+    {
+        Console.WriteLine($"{i+1} - {Titoli[i]} - {Autori[i]} - {prezzo[i]} - {categoria[i]} - {casa_editrice[i]} - x{copie[i]}");
+    }
+
+    Console.ReadKey();
+    return;
+\end{lstlisting}
+
+\newpage
+
+\subsection{PriceRange.cs}
+
+\subsubsection{Step 1}
+Lo scopo di questa funzione è di visualizzare i libri in base ad una fascia di prezzo.
+Viene chiesto all'utente di inserire un prezzo minimo e massimo, e vengono stampati i libri in quella fascia.
+
+\begin{lstlisting}
+public static void priceRange(string[] Titoli, double[] prezzo, int[] copie)
+{
+    Console.Clear();
+    Console.WriteLine("Inserisci la fascia di prezzo");
+    double min, max;
+    try
+    {
+        Console.WriteLine("Minimo");
+        min = double.Parse(Console.ReadLine());
+        Console.WriteLine("Massimo");
+        max = double.Parse(Console.ReadLine());
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Errore: Inserire un numero valido");
+        Console.ReadKey();
+        return;
+
+    }
+
+    if (min > max)
+    {
+        Console.WriteLine("Errore: Il minimo non puo essere maggiore del massimo");
+        Console.ReadKey();
+        return;
+    }
+
+    for(int i = 0; i < prezzo.Length; i++)
+    {
+        if (prezzo[i] >= min && prezzo[i] <= max)
+        {
+            Console.WriteLine($"[{i}] {Titoli[i]} \t {copie[i]} Eur \t x{copie[i]}");
+                    
+            Console.WriteLine();
+        }
+    }
+
+    Console.ReadKey();
+    return;
+
+}
+\end{lstlisting}
+
+\newpage
+
+\section{Prestiti}
+\subsection{MenuPrestiti.cs}
+\subsubsection{Step 1}
+Lo scopo di questa funzione è di gestire i prestiti.
+Viene chiesto all'utente di scegliere tra 4 opzioni:
+\begin{itemize}
+    \item Prendi in prestito
+    \item Restituisci il prestito
+    \item Visualizza i libri in prestito
+    \item Esci
+\end{itemize}
+
+Viene tutto salvato negli array citati all'inizio.
+Essendo il menu uguale a quello principale, non verrà spiegato.
+
+\begin{lstlisting}
+    ConsoleKeyInfo key;
+    int pos = 1;
+    do
+    {
+        Console.Clear();
+        Console.WriteLine();
+        LogoPrestito.logoPrestito();
+        Menu(pos);
+        key = Console.ReadKey();
+        //Se premo freccia giu incremento la posizione quindi va all`opzione dopo
+        if (key.Key == ConsoleKey.DownArrow)
+        {
+            if (pos < 4)
+            {
+                pos++;
+            }
+            if(pos == 5)
+            {
+                pos = 1;
+            }
+        }
+        //Se premo freccia su decremento la posizione quindi va all`opzione prima
+        else if (key.Key == ConsoleKey.UpArrow)
+        {
+            if (pos > 1)
+            {
+                pos--;
+            }
+            if (pos == 0)
+            {
+                pos = 4;
+            }
+        }
+    } while (key.Key != ConsoleKey.Enter);
+
+\end{lstlisting}
+
+\newpage
+
+switch per la scelta dell'utente
+\begin{lstlisting}
+    switch (pos)
+    {
+        case 1:
+
+            TakeBorrow.takeBorrow(Titoli,copie, ref libri_prestito, ref prestiti, ref utenti_prestito_nome, ref utenti_prestito_cognome, ref giorno_preso, ref tempo_trattenuto, ref codice_prestito, ref returns);
+
+            break;
+
+        case 2:
+
+            ReturnBook.returnBook(ref libri_prestito,ref utenti_prestito_nome, ref utenti_prestito_cognome, ref giorno_preso, ref tempo_trattenuto, ref codice_prestito, ref returns);
+
+            break;
+
+        case 3:
+
+            ShowBorrowesBooks.showBorrowedBooks(libri_prestito, utenti_prestito_nome, utenti_prestito_cognome, giorno_preso, tempo_trattenuto, codice_prestito, prestiti);
+
+            break;
+
+        case 4:
+
+            Console.Clear();
+            Console.WriteLine("Premi per ritornare al menu principale");
+
+            break;
+
+    }
+\end{lstlisting}
+
+\newpage
+
+\subsection{TakeBorrow.cs}
+\subsubsection{Step 1}
+In questo primo step andiamo a rimuovere dall'array dei libri e copie tutti i libri gia in prestito.
+Per poi controllare la presenza di libri o meno.
+
+\begin{lstlisting}
+    Console.Clear();
+    string[] strings = Titoli;
+    int[] ints = copie;
+            
+
+    for (int i=0; i < libri_prestito.Length; i++)
+    {
+        for(int j = 0; j < strings.Length; j++)
+        {
+            if (libri_prestito[i] == null)
+            {
+                continue;
+            }
+            if (libri_prestito[i] == strings[j])
+            {
+                if (ints[j] > 1)
+                {
+                    ints[j]--;
+                }
+                else
+                {
+                    strings[j] = null;
+                }
+            }
+        }
+    }
+
+    //controllo se ci sono libri disponibili
+    bool flag = false;
+    for (int i = 0; i < strings.Length; i++)
+    {
+        if (strings[i] != null)
+        {
+            flag = true;
+            break;
+        }
+    }
+    if (!flag)
+    {
+        Console.WriteLine("Non ci sono libri disponibili");
+        Console.ReadKey();
+        return;
+    }
+\end{lstlisting}
+
+\newpage
+
+\subsubsection{Step 2}
+Come step 2 l'utente seleziona tramite il menu quale libro prendere in prestito
+
+\begin{lstlisting}
+    //Stampo i libri disponibili e faccio il menu per il prestito
+    ConsoleKeyInfo key;
+    int pos = 0;
+    do
+    {
+                
+        Menu(strings, pos);
+        key = Console.ReadKey();
+
+        //Freccie
+        if (key.Key == ConsoleKey.DownArrow)
+        {
+            pos++;
+            if (pos >= strings.Length)
+            {
+                pos = 0;
+            }
+            while (strings[pos] == null)
+            {
+                pos++;
+                if (pos >= strings.Length)
+                {
+                    pos = 0;
+                }
+            }
+                    
+        }
+        if (key.Key == ConsoleKey.UpArrow)
+        {
+            pos--;
+            if (pos < 0)
+            {
+                pos = strings.Length - 1;
+            }
+            while(strings[pos] == null)
+            {
+                pos--;
+                if (pos < 0)
+                {
+                    pos = strings.Length - 1;
+                }
+            }
+
+        }
+    } while (key.Key != ConsoleKey.Enter);
+\end{lstlisting}
+
+\newpage
+
+\subsubsection{Step 3}
+Come step 3 l'utente inserisce il proprio nome, cognome e la data di restituzione, e il programma genera un codice prestito.
+Il codice infine stampa i dati completi del prestito.
+
+\begin{lstlisting}
+    //Aggiungo il libro preso in prestito
+    string nome, cognome, giorno_restituisci;
+
+    Console.WriteLine("Inserisci il tuo nome");
+    nome = Console.ReadLine();
+    Console.WriteLine("Inserisci il tuo cognome");
+    cognome = Console.ReadLine();
+    Console.WriteLine("Inserisci il giorno in cui devi restituire il libro, Inserisci GG/MM/AAAA");
+    giorno_restituisci = Console.ReadLine();
+
+
+
+    if (prestiti >= 2)
+    {
+        Array.Resize(ref libri_prestito, libri_prestito.Length + 1);
+        Array.Resize(ref utenti_prestito_nome, utenti_prestito_nome.Length + 1);
+        Array.Resize(ref utenti_prestito_cognome, utenti_prestito_cognome.Length + 1);
+        Array.Resize(ref giorni_preso, giorni_preso.Length + 1);
+        Array.Resize(ref tempo_trattenuto, tempo_trattenuto.Length + 1);
+        Array.Resize(ref codice_prestito, codice_prestito.Length + 1);
+
+
+    }
+    libri_prestito[prestiti - returns] = strings[pos ];
+    utenti_prestito_nome[prestiti - returns] = nome;
+    utenti_prestito_cognome[prestiti - returns] = cognome;
+    giorni_preso[prestiti - returns] = DateTime.Now.ToString("dd/MM/yyyy");
+    tempo_trattenuto[prestiti - returns] = giorno_restituisci;
+    codice_prestito[prestiti - returns] = prestiti;
+    prestiti++;
+
+    Console.WriteLine("Libro preso in prestito con successo");
+
+    Console.WriteLine("Libro : " + libri_prestito[prestiti - 1 - returns]);
+    Console.WriteLine("Utente : " + utenti_prestito_nome[prestiti - 1 - returns] + " " + utenti_prestito_cognome[prestiti - 1 - returns]);
+    Console.WriteLine("Giorno preso : " + giorni_preso[prestiti - 1 - returns]);
+    Console.WriteLine("Giorno da restituire : " + tempo_trattenuto[prestiti - 1 - returns]);
+    Console.WriteLine("Codice prestito : " + codice_prestito[prestiti - 1 - returns]);
+
+    Console.ReadKey();
+
+    return;
+\end{lstlisting}
+
+\newpage
+
+\subsection{ReturnBook.cs}
+\subsubsection{Step 1}
+In questo primo step l'utente inserisce il proprio codice e il programma controlla la sua validitá.
+
+\begin{lstlisting}
+    Console.Clear();
+    Console.WriteLine("Inserisci il codice del prestito da restituire");
+    int codice;
+    try
+    {
+        codice = int.Parse(Console.ReadLine());
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Errore: Inserire un numero");
+        return;
+    }
+
+    int pos;
+    //Flag codice non presente
+    bool flag = false;
+    for (pos = 0; pos < codice_prestito.Length; pos++)
+    {
+        if (codice_prestito[pos] == codice)
+        {
+            break;
+        }
+        if(pos == codice_prestito.Length - 1)
+        {
+            flag = true;
+        }
+    }
+
+    if(flag)
+    {
+        Console.WriteLine("Codice non presente");
+        Console.ReadKey();
+        return;
+    }
+\end{lstlisting}
+\textcolor{red}{\textbf(Nota: I codici non sono stati descritti in quanto sono molto simili a quelli visti precedentemente)}
+
+
+\newpage
+
+\subsubsection{Step 2}
+Step 2, stampare le informazioni del prestito e chiedere conferma.
+
+\begin{lstlisting}
+    //Prestito restituito si/no menu
+    ConsoleKeyInfo key;
+    int pos3 = 0;
+    do
+    {
+        Console.Clear();
+
+        string[] strings =
+        {
+        "Nome: " + utenti_prestito_nome[pos],
+        "Cognome: " + utenti_prestito_cognome[pos],
+        "Libro: " + libro_prestito[pos],
+        "Giorno preso: " + giorni_preso[pos],
+        "Tempo trattenuto: " + tempo_trattenuto[pos],
+        "Codice prestito: " + codice_prestito[pos],
+        "Confermi la restituzione? "
+
+        };
+        int consoleWidth = Console.WindowWidth;
+        for (int i = 0; i < strings.Length; i++)
+        {
+            int padding = (consoleWidth - strings[i].Length) / 2;
+            if (padding < 0)
+            {
+                padding = 0;
+            }
+            Console.WriteLine(new string(' ', padding) + $"  {strings[i]}");
+        }
+        Menu(pos3);
+        key = Console.ReadKey();
+        if (key.Key == ConsoleKey.LeftArrow)
+        {
+            if (pos3 == 1)
+                pos3--;
+                    
+        }
+        else if (key.Key == ConsoleKey.RightArrow)
+        {
+            if(pos3 == 0)
+                pos3++;
+        }
+    } while (key.Key != ConsoleKey.Enter);
+
+\end{lstlisting}
+\textcolor{red}{\textbf(Nota: I codici non sono stati descritti in quanto sono molto simili a quelli visti precedentemente)}
+
+
+\newpage
+
+\subsubsection{Step 3}
+Data la conferma, il programma rimuove il prestito e stampa un messaggio di conferma.
+
+\begin{lstlisting}
+if (pos3 == 1)
+    {
+        Console.WriteLine("Azione annullata");
+        Console.ResetColor();
+        Console.ReadKey();
+        return;
+    }
+    else
+    {
+        //Restituzione libro
+        libro_prestito[pos] = null;
+        utenti_prestito_nome[pos] = null;
+        utenti_prestito_cognome[pos] = null;
+        giorni_preso[pos] = null;
+        tempo_trattenuto[pos] = null;
+        codice_prestito[pos] = 0;
+
+        for (int i = pos; i < libro_prestito.Length - 1; i++)
+        {
+            libro_prestito[i] = libro_prestito[i + 1];
+            utenti_prestito_nome[i] = utenti_prestito_nome[i + 1];
+            utenti_prestito_cognome[i] = utenti_prestito_cognome[i + 1];
+            giorni_preso[i] = giorni_preso[i + 1];
+            tempo_trattenuto[i] = tempo_trattenuto[i + 1];
+            codice_prestito[i] = codice_prestito[i + 1];
+        }
+
+        Array.Resize(ref libro_prestito, libro_prestito.Length - 1);
+        Array.Resize(ref utenti_prestito_nome, utenti_prestito_nome.Length - 1);
+        Array.Resize(ref utenti_prestito_cognome, utenti_prestito_cognome.Length - 1);
+        Array.Resize(ref giorni_preso, giorni_preso.Length - 1);
+        Array.Resize(ref tempo_trattenuto, tempo_trattenuto.Length - 1);
+        Array.Resize(ref codice_prestito, codice_prestito.Length - 1);
+        returns++;
+        Console.WriteLine("Libro restituito con successo");
+    }
+
+    Console.ReadKey();
+    return;
+\end{lstlisting}
+
+\textcolor{red}{\textbf(Nota: I codici non sono stati descritti in quanto sono molto simili a quelli visti precedentemente)}
+
+\newpage
+
+\subsection{ShowBorrowedBooks.cs}
+\subsubsection{Step 1}
+Lo scopo di questa funzione è di visualizzare i libri in prestito.
+Vengono stampadi tutti i prestiti attivi al momento.
+
+\begin{lstlisting}
+    Console.Clear();
+    Console.WriteLine("Prestiti:");
+    for (int i = 0; i < prestiti; i++)
+    {
+        if(libri_prestito.Length <= i)
+        {
+            break;
+        }
+        Console.WriteLine("Codice prestito: " + codice_prestito[i]);
+        Console.WriteLine($"\tLibro: {libri_prestito[i]}");
+        Console.WriteLine($"\tUtente: {utenti_prestito_nome[i]} {utenti_prestito_cognome[i]}");
+        Console.WriteLine($"\tGiorno preso: {giorni_preso[i]}");
+        Console.WriteLine($"\tTempo trattenuto: {tempo_trattenuto[i]}");
+        Console.WriteLine();
+    }
+    Console.WriteLine("Premi un tasto per tornare al menu");
+    Console.ReadKey();
+\end{lstlisting}
+
+\newpage
+
+\section{Utils e Logo}
+\subsection{ToLower.cs}
+Una funzione gia esistente in C\# che trasforma una stringa in minuscolo, ma per alcuni bug ne abbiamo creato una noi.
+\begin{lstlisting}
+    public static string ToLowerString(string str)
+    {
+        //Converte la stringa in minuscolo
+        string lower = "";
+        for(int i = 0; i < str.Length; i++)
+        {
+            //Le lettere maiuscole vengono convertite in minuscole
+            if (str[i] >= 'A' && str[i] <= 'Z')
+            {
+                lower += str[i].ToString().ToLower();
+            }
+            else
+            {
+                lower += str[i];
+            }
+                
+        }
+        return lower;
+    }
+\end{lstlisting}
+
+\subsection{LogoBiblioteca.cs || LogoPrestito.cs}
+Logo della biblioteca e Prestito fatte tramite un sito TopSecret
+
+\textcolor{red}{\tiny{\textbf(Nota: Il codice dei loghi sono reperibili su github!)}}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{biblioteca.png}
+    \caption{Logo biblioteca.}
+    \label{fig:etichetta}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Prestito.png}
+    \caption{Logo Prestito.}
+    \label{fig:etichetta}
+\end{figure}
+
+
+
+\end{document}

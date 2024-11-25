@@ -62,7 +62,7 @@ namespace Biblioteca_Gruppo4
 
                     case 2:
                         
-                        ShowBook.showBook(Titoli, copie);
+                        ShowBook.showBook(Titoli, copie, Autori, prezzo, categoria, casa_editrice);
 
                         break;
 
