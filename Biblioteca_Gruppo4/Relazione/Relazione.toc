@@ -45,5 +45,6 @@
 \contentsline {section}{\numberline {4}Utils e Logo}{29}{section.4}%
 \contentsline {subsection}{\numberline {4.1}ToLower.cs}{29}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}LogoBiblioteca.cs || LogoPrestito.cs}{29}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Github}{30}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Come funziona?}{30}{subsection.5.1}%
+\contentsline {section}{\numberline {5}Git}{30}{section.5}%
+\contentsline {section}{\numberline {6}GitHub}{31}{section.6}%
+\contentsline {section}{\numberline {7}Conclusioni}{32}{section.7}%
